@@ -17,11 +17,11 @@ if (file_exists(SYSTEMPATH . 'Config/Routes.php')) {
  * --------------------------------------------------------------------
  */
 $routes->setDefaultNamespace('App\Controllers');
-$routes->setDefaultController('Home');
+$routes->setDefaultController('Books');
 $routes->setDefaultMethod('index');
 $routes->setTranslateURIDashes(false);
 $routes->set404Override();
-$routes->setAutoRoute(true);
+$routes->setAutoRoute(false);
 
 /*
  * --------------------------------------------------------------------
@@ -29,9 +29,13 @@ $routes->setAutoRoute(true);
  * --------------------------------------------------------------------
  */
 
-// We get a performance increase by specifying the default
-// route since we don't have to scan directories.
-$routes->get('/', 'Home::index');
+$routes->match(['get', 'post'], 'books/create', 'Books::create');
+$routes->match(['get', 'post'], 'books/edit/(:segment)', 'Books::edit/$1');
+$routes->get('books/delete/(:segment)', 'Books::delete/$1');
+
+$routes->get('books/(:segment)', 'Books::details/$1');
+$routes->get('books', 'Books::index');
+$routes->addRedirect('/', 'books');
 
 /*
  * --------------------------------------------------------------------
