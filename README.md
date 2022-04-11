@@ -1,63 +1,73 @@
-# CodeIgniter 4 Application Starter
+# Reading Journal: MongoDB & CodeIgniter CRUD Tutorial
 
-## What is CodeIgniter?
-
-CodeIgniter is a PHP full-stack web framework that is light, fast, flexible and secure.
-More information can be found at the [official site](http://codeigniter.com).
-
-This repository holds a composer-installable app starter.
-It has been built from the
-[development repository](https://github.com/codeigniter4/CodeIgniter4).
-
-More information about the plans for version 4 can be found in [the announcement](http://forum.codeigniter.com/thread-62615.html) on the forums.
-
-The user guide corresponding to this version of the framework can be found
-[here](https://codeigniter4.github.io/userguide/).
-
-## Installation & updates
-
-`composer create-project codeigniter4/appstarter` then `composer update` whenever
-there is a new release of the framework.
-
-When updating, check the release notes to see if there are any changes you might need to apply
-to your `app` folder. The affected files can be copied or merged from
-`vendor/codeigniter4/framework/app`.
+This is a simple 'Reading Journal' web application built with MongoDB and CodeIgniter.
 
 ## Setup
 
-Copy `env` to `.env` and tailor for your app, specifically the baseURL
-and any database settings.
+To run this application, follow the instructions below.
 
-## Important Change with index.php
+### Cloning the Repository
 
-`index.php` is no longer in the root of the project! It has been moved inside the *public* folder,
-for better security and separation of components.
+Grab the code from Github and navigate to the cloned directory:
 
-This means that you should configure your web server to "point" to your project's *public* folder, and
-not to the project root. A better practice would be to configure a virtual host to point there. A poor practice would be to point your web server to the project root and expect to enter *public/...*, as the rest of your logic and the
-framework are exposed.
+```
+git clone git@github.com:mongodb-developer/mongodb-codeigniter.git
+cd mongodb-codeigniter
+```
 
-**Please** read the user guide for a better explanation of how CI4 works!
+### Installing the MongoDB PHP Driver
 
-## Repository Management
+The [MongoDB PHP Driver](https://www.mongodb.com/docs/drivers/php/) consists of two components: the extension and the library.
 
-We use GitHub issues, in our main repository, to track **BUGS** and to track approved **DEVELOPMENT** work packages.
-We use our [forum](http://forum.codeigniter.com) to provide SUPPORT and to discuss
-FEATURE REQUESTS.
+To install the extension and load it in your `php.ini` file, run the following commands:
 
-This repository is a "distribution" one, built by our release preparation script.
-Problems with it can be raised on our forum, or as issues in the main repository.
+```
+pecl install mongodb
+echo "extension=mongodb.so" >> `php --ini | grep "Loaded Configuration" | sed -e "s|.*:\s*||"`
+```
 
-## Server Requirements
+Then, install the library with [Composer](https://getcomposer.org/):
 
-PHP version 7.3 or higher is required, with the following extensions installed:
+```
+brew install composer
+composer require mongodb/mongodb
+```
 
-- [intl](http://php.net/manual/en/intl.requirements.php)
-- [libcurl](http://php.net/manual/en/curl.requirements.php) if you plan to use the HTTP\CURLRequest library
+### Environment Variables
 
-Additionally, make sure that the following extensions are enabled in your PHP:
+Copy `env` to `.env` and replace `ATLAS_URI` with your own [Atlas URI connection string](https://docs.atlas.mongodb.com/getting-started/). Make sure you also replace the username and password placeholders with your own credentials.
 
-- json (enabled by default - don't turn it off)
-- [mbstring](http://php.net/manual/en/mbstring.installation.php)
-- [mysqlnd](http://php.net/manual/en/mysqlnd.install.php)
-- xml (enabled by default - don't turn it off)
+### Running the Application
+
+To start the local development server, run the following command:
+
+```
+php spark serve
+```
+
+Open the browser on http://localhost:8080/.
+
+## Notable Files
+
+The application consist of a few notable building blocks:
+
+### MongoDB Connection
+
+The `DatabaseConnector` class located in `app/Libraries/DatabaseConnector.php` is responsible for connecting to the MongoDB database. It gets the connection string and database name from the `.env` file. Then, it connects to the database using the [MongoDB PHP Driver](https://www.mongodb.com/docs/drivers/php/).
+
+### Books Model
+
+The `BooksModel` class located in `app/Models/BooksModel.php` implements the CRUD (Create, Read, Update, Delete) functionality for the `books` collection. 
+
+### Books Controller
+
+The `Books` class located in `app/Controllers/Books.php` is the controller for the books pages in our application. It's responsible for fetching data through the `BooksModel` and passing it to the view. It also handles the form submission and validates the form data.
+
+### Routes
+
+The application routes are configured in the `app/Config/Routes.php` file.
+
+## Disclaimer
+
+Use at your own risk; not a supported MongoDB product
+
