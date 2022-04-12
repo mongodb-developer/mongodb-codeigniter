@@ -1,9 +1,9 @@
 {
     "name": "codeigniter4/appstarter",
     "type": "project",
-    "description": "CodeIgniter4 starter app",
-    "homepage": "https://codeigniter.com",
-    "license": "MIT",
+    "description": "MongoDB & CodeIgniter CRUD Tutorial",
+    "homepage": "https://github.com/mongodb-developer/mongodb-codeigniter",
+    "license": "Apache-2.0",
     "require": {
         "php": "^7.3 || ^8.0",
         "codeigniter4/framework": "^4",
@@ -35,8 +35,7 @@
         "test": "phpunit"
     },
     "support": {
-        "forum": "http://forum.codeigniter.com/",
-        "source": "https://github.com/codeigniter4/CodeIgniter4",
-        "slack": "https://codeigniterchat.slack.com"
+        "forum": "https://github.com/mongodb-developer/mongodb-codeigniter/issues",
+        "source": "https://github.com/mongodb-developer/mongodb-codeigniter"
     }
 }
