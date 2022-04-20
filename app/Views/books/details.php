@@ -4,7 +4,7 @@
     <p>Pages: <?= esc($book['pages']) ?></p>
     <p>Pages read: <?= esc($book['pagesRead']) ?></p>
 
-    <p>Your reading progress:</p>
+    <p id="reading-progress">Your reading progress:</p>
     <div class="progress">
         <div
             class="progress-bar"
@@ -13,6 +13,7 @@
             aria-valuenow="<?= $book['progress'] ?>"
             aria-valuemin="0"
             aria-valuemax="100"
+            aria-labelledby="reading-progress"
         ><?= $book['progress'] ?>%</div>
     </div>
 
