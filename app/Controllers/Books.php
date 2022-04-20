@@ -44,7 +44,7 @@ class Books extends BaseController
         $model = model(BooksModel::class);
 
         if ($this->request->getMethod() === 'post' && $this->validate([
-            'title' => 'required|min_length[3]|max_length[255]',
+            'title' => 'required|min_length[1]|max_length[255]',
             'author' => 'required|min_length[1]|max_length[255]',
             'pages' => 'required|is_natural_no_zero',
         ])) {
@@ -75,7 +75,7 @@ class Books extends BaseController
         $data['title'] = $data['book']['title'];
 
         if ($this->request->getMethod() === 'post' && $this->validate([
-            'title' => 'required|min_length[3]|max_length[255]',
+            'title' => 'required|min_length[1]|max_length[255]',
             'author' => 'required|min_length[1]|max_length[255]',
             'pagesRead' => 'required|is_natural',
         ])) {
