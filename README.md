@@ -1,6 +1,6 @@
 # Reading Journal: MongoDB & CodeIgniter CRUD Tutorial
 
-This is a 'Reading Journal' web application built with MongoDB and CodeIgniter.
+This is a 'Reading Journal' web application built with MongoDB and CodeIgniter. You can also follow the step-by-step [tutorial](https://www.mongodb.com/compatibility/mongodb-and-codeigniter) for building this application.
 
 ![Demonstration of the Reading Journal Application](demo.gif)
 
